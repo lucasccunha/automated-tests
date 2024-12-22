@@ -1,11 +1,8 @@
 package br.com.fiap;
 
-import br.com.fiap.math.SimpleMath;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
-
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 

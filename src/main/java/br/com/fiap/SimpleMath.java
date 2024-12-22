@@ -1,4 +1,4 @@
-package br.com.fiap.math;
+package br.com.fiap;
 
 public class SimpleMath {
 

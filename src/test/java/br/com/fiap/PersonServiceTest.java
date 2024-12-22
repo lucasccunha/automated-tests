@@ -33,22 +33,27 @@ public class PersonServiceTest {
 
         // When / Act
         Person actual = service.createPerson(person);
+
         // Then / Assert
         assertNotNull(actual, () -> "O método createPerson() não deveria ter retornado null!");
     }
 
-    @DisplayName("Quando criar uma pessoa com sucesso, deve conter o primeiro nome no objeto retornado")
+    @DisplayName("Quando criar uma pessoa com sucesso, deve conter os atributos corretos no objeto retornado")
     @Test
-    void testCreatePerson_QuandoSucesso_DeveConterPrimeiroNomeNoObjetoRetornado() {
+    void testCreatePerson_QuandoSucesso_DeveConterAtributosCorretosNoObjetoRetornado() {
 
         // Given / Arrange
         IPersonService service = new PersonService();
 
         // When / Act
         Person actual = service.createPerson(person);
+
         // Then / Assert
         assertNotNull(actual, () -> "O método createPerson() não deveria ter retornado null!");
         assertEquals(person.getFirstName(), actual.getFirstName(), () -> "O primeiro nome do objeto retornado não corresponde ao esperado!");
+        assertEquals(person.getLastName(), actual.getLastName(), () -> "O sobrenome do objeto retornado não corresponde ao esperado!");
+        assertEquals(person.getEmail(), actual.getEmail(), () -> "O email do objeto retornado não corresponde ao esperado!");
+        assertEquals(person.getAddress(), actual.getAddress(), () -> "O endereço do objeto retornado não corresponde ao esperado!");
+        assertEquals(person.getGender(), actual.getGender(), () -> "O gênero do objeto retornado não corresponde ao esperado!");
     }
-
 }

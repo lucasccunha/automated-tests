@@ -12,9 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PersonServiceTest {
 
     Person person;
+    IPersonService service;
 
     @BeforeEach
     void setup() {
+        service = new PersonService();
         person = new Person(
                 "John",
                 "Doe",
@@ -29,7 +31,6 @@ public class PersonServiceTest {
     void testCreatePerson_QuandoSucesso_DeveRetornarObjetoPessoa() {
 
         // Given / Arrange
-        IPersonService service = new PersonService();
 
         // When / Act
         Person actual = service.createPerson(person);
@@ -43,7 +44,6 @@ public class PersonServiceTest {
     void testCreatePerson_QuandoSucesso_DeveConterAtributosCorretosNoObjetoRetornado() {
 
         // Given / Arrange
-        IPersonService service = new PersonService();
 
         // When / Act
         Person actual = service.createPerson(person);
@@ -56,5 +56,26 @@ public class PersonServiceTest {
         assertEquals(person.getEmail(), actual.getEmail(), () -> "O email do objeto retornado não corresponde ao esperado!");
         assertEquals(person.getAddress(), actual.getAddress(), () -> "O endereço do objeto retornado não corresponde ao esperado!");
         assertEquals(person.getGender(), actual.getGender(), () -> "O gênero do objeto retornado não corresponde ao esperado!");
+    }
+
+
+    @DisplayName("Ao criar uma pessoa com e-mail nulo deve lançar uma exceção")
+    @Test
+    void testCreatePerson_Com_Email_Nulo_Develancar_IlegalArgumentException() {
+        // Given / Arrange
+        person.setEmail(null);
+
+        var expectedMessage = "O e-mail da pessoa é nulo ou vazio!";
+
+        // When / Act & Then / Assert
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> service.createPerson(person),
+                () -> "Um e-mail vazio deve ter causado uma IllegalArgumentException!"
+        );
+        // Then / Assert
+        assertEquals(
+                expectedMessage,
+                exception.getMessage(),
+        () -> "A mensagem de erro de exceção está incorreta!");
     }
 }

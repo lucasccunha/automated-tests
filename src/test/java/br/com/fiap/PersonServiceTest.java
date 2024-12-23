@@ -49,6 +49,7 @@ public class PersonServiceTest {
         Person actual = service.createPerson(person);
 
         // Then / Assert
+        assertNotNull(person.getId(), () -> "ID da pessoa está faltando");
         assertNotNull(actual, () -> "O método createPerson() não deveria ter retornado null!");
         assertEquals(person.getFirstName(), actual.getFirstName(), () -> "O primeiro nome do objeto retornado não corresponde ao esperado!");
         assertEquals(person.getLastName(), actual.getLastName(), () -> "O sobrenome do objeto retornado não corresponde ao esperado!");
